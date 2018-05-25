@@ -100,7 +100,8 @@ public class PickPhotoActivity extends AppCompatActivity {
         } else {
             //Android 7.0系统开始 使用本地真实的Uri路径不安全,使用FileProvider封装共享Uri
             //参数二:fileprovider绝对路径 com.dyb.testcamerademo：项目包名
-            imageUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", outputImage);
+//            imageUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", outputImage);
+            imageUri = FileProvider.getUriForFile(this, "com.vipheyue.pickphoto" + ".fileprovider", outputImage);
         }
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -116,7 +117,7 @@ public class PickPhotoActivity extends AppCompatActivity {
             PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
         finish();

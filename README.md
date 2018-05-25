@@ -6,17 +6,22 @@
 
 ```
 
-        PhotoCallBackManager.callBack = object : PickPhotoCallBack {
-            override fun onSuccess(data: Intent?, filePath: String) {
-
+        PhotoCallBackManager.callBack = new PickPhotoCallBack() {
+            @Override
+            public void onSuccess(Intent data, String filePath) {
+                tv_path.setText(filePath);
             }
 
-            override fun onfail() {
+            @Override
+            public void onfail() {
 
             }
-        }
-        var intent = Intent(this, PickPhotoActivity::class.java)
-        intent.putExtra(PickPhotoActivity.REQUEST_IMAGE_TYPE, PickPhotoActivity.REQUEST_IMAGE_PICK)//选图
-//        intent.putExtra(PickPhotoActivity.REQUEST_IMAGE_TYPE, PickPhotoActivity.REQUEST_IMAGE_CAPTURE)//拍照
-        startActivity(intent)
+        };
+
+        Intent intent = new Intent(this, PickPhotoActivity.class);
+
+//        intent.putExtra(PickPhotoActivity.REQUEST_IMAGE_TYPE, PickPhotoActivity.REQUEST_IMAGE_PICK);//选图
+        intent.putExtra(PickPhotoActivity.REQUEST_IMAGE_TYPE, PickPhotoActivity.REQUEST_IMAGE_CAPTURE);//拍照
+//        intent.putExtra(PickPhotoActivity.LIB_CONTROL_PREMISSION, false);//自己控制请求权限
+        startActivity(intent);
 ```
