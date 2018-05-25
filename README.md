@@ -21,8 +21,7 @@ dependencies {
 
 
 
-
-
+```
 
 在AndroidManifest.XML清单文件中添加  项目包名
 	    <provider
@@ -34,6 +33,10 @@ dependencies {
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths" />
             </provider>
+
+```
+
+
 
 # 使用
 
