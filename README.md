@@ -21,7 +21,10 @@ dependencies {
 
 
 
-在清单文件中添加  项目包名
+
+
+
+在AndroidManifest.XML清单文件中添加  项目包名
 	    <provider
                 android:name="android.support.v4.content.FileProvider"
                 android:authorities="项目包名.fileprovider"
