@@ -4,7 +4,7 @@
 
 
 # 配置
-
+```
 allprojects {
 		repositories {
 			...
@@ -19,6 +19,7 @@ dependencies {
 	        implementation 'com.github.vipheyue:PickPhoto:V1.3'
 	}
 
+```
 
 
 ```
