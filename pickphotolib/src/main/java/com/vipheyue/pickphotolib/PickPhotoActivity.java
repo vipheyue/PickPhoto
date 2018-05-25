@@ -113,11 +113,11 @@ public class PickPhotoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             avatar_pic_hand_path = getRealPathFromURI(data.getData());
-            PhotoCallBackManager.INSTANCE.getCallBack().onSuccess(data, avatar_pic_hand_path);
+            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK && data != null) {
-            PhotoCallBackManager.INSTANCE.getCallBack().onSuccess(data, avatar_pic_hand_path);
+            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
         finish();
     }

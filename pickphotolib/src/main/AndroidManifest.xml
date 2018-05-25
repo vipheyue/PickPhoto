@@ -12,6 +12,7 @@
 
     <application>
         <activity android:name=".PickPhotoActivity" />
+
     </application>
 
 </manifest>
