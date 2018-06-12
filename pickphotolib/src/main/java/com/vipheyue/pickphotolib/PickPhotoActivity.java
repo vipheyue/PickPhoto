@@ -131,6 +131,8 @@ public class PickPhotoActivity extends AppCompatActivity {
             new MyAsyncTask().execute(filePath, avatar_pic_hand_path);
 //            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
+        finish();
+
     }
 
     private String getRealPathFromURI(Uri contentURI) {
@@ -162,7 +164,6 @@ public class PickPhotoActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             PhotoCallBackManager.callBack.onSuccess(resultData, result);
-            finish();
         }
     }
 }
