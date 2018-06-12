@@ -117,6 +117,10 @@ public class PickPhotoActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         resultData = data;
+        if (resultCode != Activity.RESULT_OK) {
+            PhotoCallBackManager.callBack.onfail();
+            finish();
+        }
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             avatar_pic_hand_path = getRealPathFromURI(data.getData());
 
@@ -131,7 +135,6 @@ public class PickPhotoActivity extends AppCompatActivity {
             new MyAsyncTask().execute(filePath, avatar_pic_hand_path);
 //            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
-        finish();
 
     }
 
@@ -164,6 +167,7 @@ public class PickPhotoActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             PhotoCallBackManager.callBack.onSuccess(resultData, result);
+            finish();
         }
     }
 }
