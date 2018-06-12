@@ -134,6 +134,7 @@ public class PickPhotoActivity extends AppCompatActivity {
             String filePath = getCacheDir() + UUID.randomUUID().toString() + ".jpg";//注意内部数据可能其他APP访问不到
             new MyAsyncTask().execute(filePath, avatar_pic_hand_path);
 //            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
+//            finish();
         }
 
     }
