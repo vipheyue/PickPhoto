@@ -1,9 +1,11 @@
 package com.vipheyue.pickphoto;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vipheyue.pickphotolib.PhotoCallBackManager;
@@ -18,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TextView tv_path = findViewById(R.id.tv_path);
+        final ImageView imageView_show = findViewById(R.id.imageView_show);
 
 
         PhotoCallBackManager.callBack = new PickPhotoCallBack() {
             @Override
             public void onSuccess(Intent data, String filePath) {
+
+                Bitmap bmp = BitmapFactory.decodeFile(filePath);//原图
+                imageView_show.setImageBitmap(bmp);
                 tv_path.setText(filePath);
             }
 

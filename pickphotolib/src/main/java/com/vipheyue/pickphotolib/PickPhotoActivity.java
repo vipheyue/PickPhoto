@@ -5,7 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -25,6 +28,7 @@ public class PickPhotoActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_IMAGE_PICK = 2;
     private String avatar_pic_hand_path = "";
+    private Intent resultData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,15 +116,21 @@ public class PickPhotoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        resultData = data;
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             avatar_pic_hand_path = getRealPathFromURI(data.getData());
-            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
+
+            String filePath = getCacheDir() + UUID.randomUUID().toString() + ".jpg";//注意内部数据可能其他APP访问不到
+            new MyAsyncTask().execute(filePath, avatar_pic_hand_path);//旋转角度
+
+//            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
+            String filePath = getCacheDir() + UUID.randomUUID().toString() + ".jpg";//注意内部数据可能其他APP访问不到
+            new MyAsyncTask().execute(filePath, avatar_pic_hand_path);
+//            PhotoCallBackManager.callBack.onSuccess(data, avatar_pic_hand_path);
         }
-        finish();
     }
 
     private String getRealPathFromURI(Uri contentURI) {
@@ -142,4 +152,17 @@ public class PickPhotoActivity extends AppCompatActivity {
         return result;
     }
 
+    public class MyAsyncTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            return ImageUtils.rotateBitmap(args[0], args[1]);
+        }
+
+        protected void onPostExecute(String result) {
+            PhotoCallBackManager.callBack.onSuccess(resultData, result);
+            finish();
+        }
+    }
 }
