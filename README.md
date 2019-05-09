@@ -16,7 +16,7 @@ allprojects {
 
 
 dependencies {
-	        implementation 'com.github.vipheyue:PickPhoto:V1.3'
+	        implementation 'com.github.vipheyue:PickPhoto:V1.6'
 	}
 
 ```
